@@ -19,7 +19,8 @@ class HouseSpider(scrapy.Spider):
             yield scrapy.Request(detail_url, callback=self.detail_parse, meta={"houseItem": houseItem})
         next_page = 'https://sh.lianjia.com/xiaoqu/pg'+str(self.page_num) + '/?from=rec'
         self.page_num = self.page_num + 1
-        yield scrapy.Request(next_page, callback=self.parse)
+        if self.page_num < 31:
+            yield scrapy.Request(next_page, callback=self.parse)
 
     def detail_parse(self, response):
         houseItem = response.meta["houseItem"]
