@@ -78,5 +78,4 @@ class HouseSpider(scrapy.Spider):
             houseitem['louceng'] = response.xpath('//div[@class="can-item"][3]/div[@class="can-border"]/ul/li[' + index + ']/div[@class="des"]/text()').extract_first().strip()
         else:
             houseitem['louceng'] = ""
-        print(houseitem)
-        # yield houseitem
+        yield houseitem
