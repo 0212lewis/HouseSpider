@@ -36,6 +36,12 @@ class HouseSpider(scrapy.Spider):
                 houseitem['price'] = '价格未定'
         else:
             houseitem['price'] = ""
+        if ('区域位置' in tab1List) :
+            index = str(tab1List.index('区域位置')+1)
+            houseitem['field'] = response.xpath('//div[@class="can-item"][1]/div[@class="can-border"]/ul/li[' + index + ']/div[@class="des"]/a[1]/text()').extract_first()
+        else:
+            houseitem['field'] = ""
+
         if ('楼盘地址' in tab1List) :
             index = str(tab1List.index('楼盘地址')+1)
             houseitem['address'] = response.xpath('//div[@class="can-item"][1]/div[@class="can-border"]/ul/li[' + index + ']/div[@class="des"]/text()').extract_first().strip()
@@ -47,7 +53,6 @@ class HouseSpider(scrapy.Spider):
             index = str(tab2List.index('楼盘户型')+1)
             houseitem['huxing'] = response.xpath('//div[@class="can-item"][2]/div[@class="can-border"]/ul/li[' + index + ']/div[@class="des"]/text()').extract_first().strip()
             houseitem['huxing'] = houseitem['huxing'].replace('\n', "").replace('\r', "").replace(" ", "")
-            print()
         else:
             houseitem['huxing'] = ""
         if ('交房时间' in tab2List) :
@@ -73,4 +78,5 @@ class HouseSpider(scrapy.Spider):
             houseitem['louceng'] = response.xpath('//div[@class="can-item"][3]/div[@class="can-border"]/ul/li[' + index + ']/div[@class="des"]/text()').extract_first().strip()
         else:
             houseitem['louceng'] = ""
-        yield houseitem
+        print(houseitem)
+        # yield houseitem

@@ -40,6 +40,9 @@ class anjukeHouseItem(scrapy.Item):
     # ridgepole = scrapy.Field()
     #均价
     price = scrapy.Field()
+
+    #区域
+    field = scrapy.Field()
     pass
 
 
